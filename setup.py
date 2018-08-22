@@ -9,9 +9,8 @@ setuptools.setup(
     author="Joe Fair",
     author_email="joe@fairanswers.com",
     description="Simple Workflow Library",
-#    long_description=long_description,
-#    long_description_content_type="text/markdown",
     url="https://fairanswers.com",
+    dependency_links=['https://github.com/timtadh/dot_tools'],
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 2",
