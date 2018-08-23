@@ -1,5 +1,3 @@
-import fair_flow
+from fair_flow import *
 name = "fair_flow"
 
-def doit():
-  return "Did It"

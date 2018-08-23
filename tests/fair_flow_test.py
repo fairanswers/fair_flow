@@ -1,6 +1,6 @@
 import pytest
 import fair_flow
-import fair_flow_example
+#import fair_flow_example
 from dot_tools import parse
 from dot_tools.dot_graph import SimpleGraph
 
