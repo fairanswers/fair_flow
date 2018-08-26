@@ -181,13 +181,13 @@ def test_random_activities(good_dot_src):
         assert (job.find_activity_by_id('send_text').returned == False
             or job.find_activity_by_id('end').state == 'COMPLETE')
 
-def test_chores(chore_dot):
-    ps = fair_flow.Process.parse(chore_dot)
-    runner = fair_flow.create_runner()
-    job = ps.createJob("999")
-    runner.run(job)
-    print(job.to_dot())
-
+#def test_chores(chore_dot):
+#    ps = fair_flow.Process.parse(chore_dot)
+#    runner = fair_flow.create_runner()
+#    job = ps.createJob("999")
+#    runner.run(job)
+#    print(job.to_dot())
+#
 #
 #def get_module_class_name_from_dot_name():
 #    default="Say"

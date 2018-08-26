@@ -1,0 +1,8 @@
+digraph Process_Two {  id22 [ name = "Say" state = "WAITING" returned = "Any" fillcolor=GREY style=filled shape=ellipse] 
+  id33 [ name = "Sing" state = "WAITING" returned = "Any" fillcolor=GREY style=filled shape=ellipse] 
+id22 -> id33 [label=Any]
+  id44 [ name = "Say" state = "WAITING" returned = "Any" fillcolor=GREY style=filled shape=ellipse] 
+id22 -> id44 [label=Any]
+  id55 [ name = "Sing" state = "WAITING" returned = "Any" fillcolor=GREY style=filled shape=ellipse] 
+id22 -> id55 [label=Any]
+}
