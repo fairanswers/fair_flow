@@ -112,6 +112,7 @@ class Activity(Pretty):
         if fields['name'] is None:
             return "Nope"
         module_name, class_name = Activity.get_module_class_name_from_dot_name(fields['name'])
+        #import pdb; pdb.set_trace()
         tmp_cls=getattr(sys.modules[module_name], class_name)
         act=tmp_cls(id)
         # If this gets complicated, use this solution https://stackoverflow.com/questions/60208/replacements-for-switch-statement-in-python
@@ -125,12 +126,12 @@ class Activity(Pretty):
 
     @classmethod
     def get_module_class_name_from_dot_name(self, name):
-        # TODO Learn more about modules and sub modules.  Handle "module.submodule.Activity, if that's a thing."
+        # TODO Learn more about modules and sub modules."
         count=name.split(".")
-        if len(count) > 2:
-            raise AttributeError("Can't parse modules more than one deep.  Module name is "+name)
-        if len(count) == 2:
-            return count
+        if len(count) > 1:
+            mod = name[:name.rfind('.')]
+            cls = name[name.rfind('.')+1:]
+            return mod, cls
         else:
             return __name__ , name
 
