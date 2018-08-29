@@ -285,42 +285,42 @@ class dot_data_store(Pretty):
     def list(self):
         pass
 
-class file_dot_data_store(dot_data_store):
-    store_dir=""
-    extention=".dot"
-
-    def filename_from_id(self, id):
-        filename = self.store_dir + os.sep + id + self.extention
-        return filename
-
-    def __init__(self, dir=os.getcwd()+os.sep+"dot_archive"):
-        self.store_dir=dir
-        if not os.path.exists(self.store_dir):
-            os.makedirs(self.store_dir)
-        if not os.access(self.store_dir, os.W_OK):
-            raise IOError("Can't write to archive directory "+self.store_dir)
-
-    def save(self, dot):
-        filename=self.filename_from_id(dot.id)
-        with open(filename, 'w') as f:
-            f.write(dot.to_dot() )
-            return dot
-
-    def load(self, id):
-        filename = self.filename_from_id(id)
-        with open(filename) as f:
-            dot=f.read()
-        ps= Process.parse(dot)
-        return ps
-
-    def delete(self, id):
-        filename = self.filename_from_id(id)
-        os.remove(filename)
-        return True
-
-    def list(self):
-        cont=os.listdir(self.store_dir)
-        return cont
+#class file_dot_data_store(dot_data_store):
+#    store_dir=""
+#    extention=".dot"
+#
+#    def filename_from_id(self, id):
+#        filename = self.store_dir + os.sep + id + self.extention
+#        return filename
+#
+#    def __init__(self, dir=os.getcwd()+os.sep+"dot_archive"):
+#        self.store_dir=dir
+#        if not os.path.exists(self.store_dir):
+#            os.makedirs(self.store_dir)
+#        if not os.access(self.store_dir, os.W_OK):
+#            raise IOError("Can't write to archive directory "+self.store_dir)
+#
+#    def save(self, dot):
+#        filename=self.filename_from_id(dot.id)
+#        with open(filename, 'w') as f:
+#            f.write(dot.to_dot() )
+#            return dot
+#
+#    def load(self, id):
+#        filename = self.filename_from_id(id)
+#        with open(filename) as f:
+#            dot=f.read()
+#        ps= Process.parse(dot)
+#        return ps
+#
+#    def delete(self, id):
+#        filename = self.filename_from_id(id)
+#        os.remove(filename)
+#        return True
+#
+#    def list(self):
+#        cont=os.listdir(self.store_dir)
+#        return cont
 
 class create_runner(Pretty):
     def __init__(self):

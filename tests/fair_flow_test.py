@@ -1,6 +1,5 @@
 import pytest
 import fair_flow
-import fair_flow_example
 from dot_tools import parse
 from dot_tools.dot_graph import SimpleGraph
 
@@ -45,34 +44,6 @@ def good_dot_src():
   send_email -> error [label="False"]
 }
     '''
-    return str
-
-@pytest.fixture()
-def chore_dot():
-    str='''
-digraph chores
-{
-    feed_dog -> needs_water [label="Any"]   
-    needs_water -> water_dog [label=True]
-    needs_water -> is_first_of_month [label=False]
-    water_dog -> is_first_of_month [label=Any]
-    is_first_of_month -> end [label=False]
-    is_first_of_month -> medicate_dog [label=True]
-    medicate_dog -> pills_left 
-    pills_left -> end [label=True]
-    pills_left -> order_medication [label=False]
-    order_medication -> end [label=Any]
-    
-    feed_dog [name="fair_flow.fair_flow_example.FeedDog"]
-    needs_water [name="Always_True"]
-    water_dog [name="fair_flow.fair_flow_example.WaterDog"]
-    is_first_of_month [name=Command command="me.returned=True"]
-    end [name=Say]
-    medicate_dog [name="fair_flow.fair_flow_example.MedicateDog"]
-    pills_left [name=Command command="me.returned=False"]
-    order_medication [name="fair_flow.fair_flow_example.OrderMedication"]
-}
-'''
     return str
 
 def test_dot_tools(process):
@@ -126,17 +97,17 @@ def test_is_parent_conditional(say, sing):
     assert True  == sing.has_parent(say.id, fair_flow.Activity.Returned.ANY)
 
 
-def test_file_store(process):
-    name=process.id
-    data=process.to_dot()
-    store=fair_flow.file_dot_data_store()
-    # assert len(store.list() )==0
-    out=store.save(process)
-    loaded=store.load(name)
-    #TODO: implement equals
-    assert len(loaded.to_dot()) > 50 and len(process.to_dot()) > 50
-    assert len(store.list())>0
- #   assert store.delete(loaded.id)
+#def test_file_store(process):
+#    name=process.id
+#    data=process.to_dot()
+#    store=fair_flow.file_dot_data_store()
+#    # assert len(store.list() )==0
+#    out=store.save(process)
+#    loaded=store.load(name)
+#    #TODO: implement equals
+#    assert len(loaded.to_dot()) > 50 and len(process.to_dot()) > 50
+#    assert len(store.list())>0
+# #   assert store.delete(loaded.id)
 
 def test_execute_with_context(process):
     com=fair_flow.Command()
@@ -181,14 +152,6 @@ def test_random_activities(good_dot_src):
         assert (job.find_activity_by_id('send_text').returned == False
             or job.find_activity_by_id('end').state == 'COMPLETE')
 
-#def test_chores(chore_dot):
-#    ps = fair_flow.Process.parse(chore_dot)
-#    runner = fair_flow.create_runner()
-#    job = ps.createJob("999")
-#    runner.run(job)
-#    print(job.to_dot())
-#
-#
 #def get_module_class_name_from_dot_name():
 #    default="Say"
 #    external="otherpackage.Say"
