@@ -5,12 +5,12 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="fair_flow",
-    version="0.0.1",
+    version="0.0.4",
     author="Joe Fair",
     author_email="joe@fairanswers.com",
     description="Simple Workflow Library",
     url="https://fairanswers.com",
-    dependency_links=['https://github.com/timtadh/dot_tools'],
+    dependency_links=['git+https://github.com/timtadh/dot_tools@master#egg=dot_tools-0.1'],
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 2",

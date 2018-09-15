@@ -110,7 +110,7 @@ class Activity(Pretty):
     def parse_from_dot(cls, id, fields):
         #print("About to check for fields. name in "+str(fields))
         if fields['name'] is None:
-            return "Nope"
+            raise TypeError("No fields defind for class "+cls+" id "+id)
         module_name, class_name = Activity.get_module_class_name_from_dot_name(fields['name'])
         #import pdb; pdb.set_trace()
         tmp_cls=getattr(sys.modules[module_name], class_name)
