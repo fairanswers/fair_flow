@@ -112,7 +112,6 @@ class Activity(Pretty):
         if fields['name'] is None:
             raise TypeError("No fields defind for class "+cls+" id "+id)
         module_name, class_name = Activity.get_module_class_name_from_dot_name(fields['name'])
-        #import pdb; pdb.set_trace()
         tmp_cls=getattr(sys.modules[module_name], class_name)
         act=tmp_cls(id)
         # If this gets complicated, use this solution https://stackoverflow.com/questions/60208/replacements-for-switch-statement-in-python
@@ -243,7 +242,7 @@ class Job(Process):
         return children
 
 class FlexibleJobRunner(Pretty):
-    def execute_job(self, job):
+    def execute_job(self, job, step=False):
         self.set_all_parentless_activity_to_ready(job)
         while self.has_ready_activities(job):
             act = self.find_ready_activity(job)
@@ -254,10 +253,12 @@ class FlexibleJobRunner(Pretty):
             nextReady = job.find_children(act)
             for nr in nextReady:
                 nr.state = Activity.State.READY
+            if step:
+                return
 
     def set_all_parentless_activity_to_ready(self, job):
         for act in job.activities:
-            if len(act.parents) == 0:
+            if len(act.parents) == 0 and act.state==Activity.State.WAITING:
                 act.state=Activity.State.READY
 
     def has_ready_activities(self, job):

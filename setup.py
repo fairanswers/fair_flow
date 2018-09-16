@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="fair_flow",
-    version="0.0.4",
+    version="0.0.5",
     author="Joe Fair",
     author_email="joe@fairanswers.com",
     description="Simple Workflow Library",
