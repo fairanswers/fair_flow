@@ -40,20 +40,12 @@ class Activity(Pretty):
             O.__init__(self, id=-1, name=name)
         self.id = id
         self.name = name
+        self.label=name
         self.parents=[]
         self.state=Activity.State.WAITING
         self.returned=self.Returned.ANY
         # Optional command to eval on the jobs "context"
         self.command=""
-
-    def to_dot(self):
-        # http://www.graphviz.org/doc/info/index.html
-        c= self.__class__
-        dot = '  {} [ name = "{}" state = "{}" returned = "{}" fillcolor={} style=filled shape=ellipse] \n'\
-            .format( self.id, self.name, self.state, self.returned, self.calculate_color())
-        for p in self.parents:
-            dot = dot + '{} -> {} [label={}]\n'.format(p[0], self.id, p[1])
-        return dot
 
     def calculate_color(self):
         return {
@@ -122,6 +114,15 @@ class Activity(Pretty):
             else:
                 act.__setattr__(str(key), str(fields[key]))
         return act
+
+    def to_dot(self):
+        # http://www.graphviz.org/doc/info/index.html
+        c= self.__class__
+        dot = '  {} [ label = "{}" name = "{}" state = "{}" returned = "{}" fillcolor={} style=filled shape=ellipse] \n'\
+            .format(self.id, self.label, self.name, self.state, self.returned, self.calculate_color())
+        for p in self.parents:
+            dot = dot + '{} -> {} [label={}]\n'.format(p[0], self.id, p[1])
+        return dot
 
     @classmethod
     def get_module_class_name_from_dot_name(self, name):
