@@ -35,11 +35,13 @@ class Activity(Pretty):
         ANY='Any'
         ERROR='ERROR' # Do we need this?
 
-    def __init__(self, id=-1, name='unknown'):
+    def __init__(self, id=-1, name="unknown"):
         def __init__(self, id=-1, name='unknown'):
             O.__init__(self, id=-1, name=name)
         self.id = id
         self.name = name
+        if name == "unknown":
+           self.name=id
         self.label=name
         self.parents=[]
         self.state=Activity.State.WAITING
