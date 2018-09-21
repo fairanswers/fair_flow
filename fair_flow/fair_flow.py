@@ -121,8 +121,8 @@ class Activity(Pretty):
     def to_dot(self):
         # http://www.graphviz.org/doc/info/index.html
         c= self.__class__
-        dot = '  {} [ label = "{}" name = "{}" state = "{}" returned = "{}" fillcolor={} style=filled shape=ellipse] \n'\
-            .format(self.id, self.label, self.name, self.state, self.returned, self.calculate_color())
+        dot = '  {} [ label = "{}" name = "{}" state = "{}" returned = "{}" command = "{}" fillcolor={} style=filled shape=ellipse] \n'\
+            .format(self.id, self.label, self.name, self.state, self.returned, self.command, self.calculate_color())
         for p in self.parents:
             dot = dot + '{} -> {} [label={}]\n'.format(p[0], self.id, p[1])
         return dot

@@ -46,6 +46,21 @@ def good_dot_src():
     '''
     return str
 
+@pytest.fixture()
+def pre_command():
+    c=fair_flow.Command("id77", "The Command Activity")
+    c.command = 'me.returned=False'
+    return c
+
+def test_pre_command(pre_command):
+    assert(len(pre_command.command) > 1)
+    context = {}
+    context['me']=pre_command
+    pre_command.execute_command(context)
+    assert(pre_command.returned == False)
+
+
+
 def test_dot_tools(process):
     runner = fair_flow.FlexibleJobRunner()
     job = process.createJob(111)
