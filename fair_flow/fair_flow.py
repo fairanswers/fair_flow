@@ -40,9 +40,10 @@ class Activity(Pretty):
             O.__init__(self, id=-1, name=name)
         self.id = id
         self.name = name
+        self.label=name
         if name == "unknown":
            self.name=id
-        self.label=name
+           self.label=id
         self.parents=[]
         self.state=Activity.State.WAITING
         self.returned=self.Returned.ANY
