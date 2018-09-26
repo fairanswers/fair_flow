@@ -2,11 +2,11 @@
 A Simple Workflow Library
 
 ## Overview
-fair_flow is a simple implementation of a work flow system. A work flow describes a series of activities that need to be done.  
+fair_flow is a simple implementation of a work flow engine. A work flow describes a series of activities for a computer to do.  
 
-This is handy when you have a complex system but you want non-programmers to make changes. Instead of writing up requirements and waiting for the rest of the process to be done by programmers, non-programmers can use fair_flow to modify a process, then the library takes care of executing that process.
+This is handy when you have a complex system but you want non-programmers to be able to make changes. Instead of writing up requirements and waiting for programmers, non-programmers can use fair_flow to create or modify a process.  This encourages innovation with rapid feedback.
 
-The basic building block in fair_flow is the **activity**.  An activity is a reusable piece of code that completes one step.  For instance, an activity might get data from a service, calculate a value, or send an email.  An activity can be strung together with other activities to describe a process. Activities can be used more than once in the same process or in different processes.
+The basic building block in fair_flow is the **activity**.  An activity is a reusable piece of code that completes one step.  For instance, an activity might get data from a service, calculate a value, or send an email.  One activity can be strung together with other activities to describe a process. Activities are reusable in the same process or in different processes.
 
 A **process** is a group of activities.  The process describes what activities will be executed and how they relate.  Think of a process as a recipe.
 
@@ -38,9 +38,9 @@ If you break this into individual activities, it might look like this:
 
         3.3      Any pills left?
 
-                3.3.1 . Yes: do nothing.
+        3.3.1 Yes: do nothing.
 
-                3.3.2 . No:  order pills.
+        3.3.2 No:  order pills.
 
 4.    Finish
 
@@ -110,10 +110,8 @@ Custom steps are written in Python, and extend the Activity class.  This gives t
 
 Custom commands look like this:
 
-[This code in in example/fair_bpm_example.py]
-
 <pre>
-import fair_bpm
+import fair_flow
 
 class FeedDog(fair_bpm.Activity):
     def execute(self, context=None):
@@ -163,7 +161,8 @@ Luckily, Graphviz has been around for decades, so there are parsers for it in ju
 In order to be a helpful tool for non-programmers, we'll need a snazzy front end that makes it easy to:
 *  Declare nodes and Edges (and their attributes)
 *  Use the RESTful interface to CRUD processes
-I took a first cut at a front-end and put it up at http://github.com/fairanswers/fair_flow_example . Download and run it, if you haven't already, and try it out.
+
+I took a first cut at a front-end and put it up at http://github.com/fairanswers/fair_flow_example .
 
 # Installation
 
@@ -173,7 +172,7 @@ First, clone this repo and run pip install -r requirements from the clone direct
 # Getting Started
 From the web page you'll have examples to load into the left pane.  Click on one of those to see the dot file format in it's most simple form.  Then, select to either step through each step, or run them all at once.
 
-*Note:*  If you step through each step, they layout (left to right) may change, but the values do not.  Graphviz is just not very good at maintaining the same order every time it runs.
+*Note:*  If you step through each step, the layout (left to right) may change, but the values do not.  Graphviz is not very good at maintaining the same order between runs.
 
 You can step through all the steps, or select Run at any time to complete the flow.
 
