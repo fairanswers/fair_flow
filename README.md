@@ -38,9 +38,9 @@ If you break this into individual activities, it might look like this:
 
         3.3      Any pills left?
 
-        3.3.1 Yes: do nothing.
+          3.3.1 Yes: do nothing.
 
-        3.3.2 No:  order pills.
+          3.3.2 No:  order pills.
 
 4.    Finish
 
